@@ -1,9 +1,31 @@
-<script setup> 
+<script>
+export default {
+  data() {
+    return {
+      counter: 0,
+    };
+  },
+  methods: {
+    increment() {
+      this.counter++
+    }
+  }
+}
+</script>
 
-</script> 
+<template>
+  <h1>Yorch</h1>
+  <button @click="increment">{{ counter }}</button>
+</template>
+
+<!--
+<script setup>
+
+</script>
 
 <template>
   <h1>
     Yorch
   </h1>
 </template>
+-->
