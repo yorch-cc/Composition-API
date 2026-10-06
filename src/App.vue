@@ -1,31 +1,13 @@
-<script>
-export default {
-  data() {
-    return {
-      counter: 0,
-    };
-  },
-  methods: {
-    increment() {
-      this.counter++
-    }
-  }
-}
+<script setup>
+  import ButtonCounter from './components/ButtonCounter.vue'
+
 </script>
 
 <template>
   <h1>Yorch</h1>
-  <button @click="increment">{{ counter }}</button>
+    <ButtonCounter />
 </template>
 
-<!--
-<script setup>
+<style></style>
 
-</script>
 
-<template>
-  <h1>
-    Yorch
-  </h1>
-</template>
--->
