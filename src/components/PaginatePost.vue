@@ -1,6 +1,6 @@
 <script setup>
 
-defineProps(['inicio', 'fin'])
+defineProps(['inicio', 'fin', 'maxLength'])
 
     const emit = defineEmits(['next','prev'])
 </script>
@@ -14,7 +14,7 @@ defineProps(['inicio', 'fin'])
 </button>
   
   <button @click="emit('next')" type="button" class="btn btn-outline-primary"
-  :disabled="fin >= 100 "
+  :disabled="fin >= maxLength "
  
   >
   Next {{ fin }}

@@ -41,7 +41,7 @@ fetch('https://jsonplaceholder.typicode.com/posts')
 
   
 
-  <PaginatePost @next="next" @prev="prev" :inicio="inicio" :fin="fin" class="mb-2"/>
+  <PaginatePost @next="next" @prev="prev" :inicio="inicio" :fin="fin" :maxLength="posts.length" class="mb-2"/>
 
 
 
