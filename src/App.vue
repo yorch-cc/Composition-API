@@ -2,17 +2,18 @@
 import BlogPost from './BlogPost.vue';
 import{ref} from 'vue';
 
-const posts = ref([
-  {title: 'Post 1', id: 1, body: 'descripcion 1'},
-  {title: 'Post 2', id: 2, body: 'descripcion 2'},
-  {title: 'Post 3', id: 3, body: 'descripcion 3'}
-]);
+const posts = ref([]);
 
 const fav = ref('')
 
 const cambiarFav = (post) => {
   fav.value = post
 }
+
+fetch('https://jsonplaceholder.typicode.com/posts')
+.then((res) => res.json())
+.then((data) => {
+  posts.value = data})
 
 </script>
 
@@ -35,5 +36,4 @@ v-for="post in posts"
 </template>
 
 <style></style>
-
 
