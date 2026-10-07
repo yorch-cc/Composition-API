@@ -39,10 +39,9 @@ fetch('https://jsonplaceholder.typicode.com/posts')
   <h1>Yorch</h1>
   <h2>Mi Post Fav: {{ fav }}</h2>
 
-  <button @click="next">Next provisory</button>
-  <button @click="prev">prev provisory</button>   
+  
 
-  <PaginatePost class="mb-2"/>
+  <PaginatePost @next="next" @prev="prev" class="mb-2"/>
 
 
 
