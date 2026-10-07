@@ -1,12 +1,26 @@
 <script setup>
+
+defineProps(['inicio', 'fin'])
+
     const emit = defineEmits(['next','prev'])
 </script>
 
 <template>  
  <div class="btn-group" role="group" aria-label="Basic example">
-  <button @click="emit('prev')" type="button" class="btn btn-outline-primary">Previous</button>
+  <button @click="emit('prev')" type="button" class="btn btn-outline-primary"
+  :disabled="inicio === 0"
+  >
+  Previous {{ inicio }}
+</button>
   
-  <button @click="emit('next')" type="button" class="btn btn-outline-primary">Next</button>
+  <button @click="emit('next')" type="button" class="btn btn-outline-primary"
+  :disabled="fin >= 100 "
+ 
+  >
+  Next {{ fin }}
+
+</button>
+  
 
 
 </div>
