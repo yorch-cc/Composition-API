@@ -1,47 +1,100 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import{ref, onMounted} from 'vue';
+import BlogPost from './BlogPost.vue';
+import PaginatePost from './components/PaginatePost.vue';
+import LoadingSpinner from './components/LoadingSpinner.vue';
+
+const posts = ref([]);
+
+const fav = ref('')
+
+const postXPage = 10
+
+const inicio = ref(0)
+
+const fin = ref(postXPage)
+
+const loading = ref(true)
+
+const cambiarFav = (post) => {
+  fav.value = post
+}
+
+const next = () => {
+  inicio.value = inicio.value + postXPage
+  fin.value = fin.value + postXPage
+}
+
+const prev = () =>{
+  inicio.value = inicio.value - postXPage
+  fin.value = fin.value - postXPage
+ }
+
+/*fetch('https://jsonplaceholder.typicode.com/posts')
+.then((res) => res.json())
+.then((data) => {
+  posts.value = data;
+})
+.catch((e) => console.log(e))
+.finally(() => (loading.value = false)) */
+
+/*onMounted(async() => {
+    //loading.value = true;
+    try{
+      const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+      posts.value = await res.json()
+    } catch(error){
+      console.log(error) 
+    } finally{
+      setTimeout(() => {
+         loading.value = false;
+      }, 2000);
+     
+    }
+}) */
+
+const fetchData = async() => {
+  
+    try{
+      const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+      posts.value = await res.json()
+    } catch(error){
+      console.log(error) 
+    } finally{
+      setTimeout(() => {
+         loading.value = false;
+      }, 2000);
+     
+    }
+}
+fetchData()
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <LoadingSpinner v-if="loading"/>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+  <div class="container" v-else>
+  <h1>Yorch</h1>
+  <h2>Mi Post Fav: {{ fav }}</h2>
 
-  <main>
-    <TheWelcome />
-  </main>
+  
+
+  <PaginatePost @next="next" @prev="prev" :inicio="inicio" :fin="fin" :maxLength="posts.length" class="mb-2"/>
+
+
+
+<BlogPost 
+v-for="post in posts.slice(inicio, fin)"
+:key="post.id"
+    :title="post.title" 
+    :id="post.id"
+     :body="post.body" 
+     @cambiarFavNombre ="cambiarFav"
+     class="mb-2"
+/>
+
+</div>  
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<style></style>
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
