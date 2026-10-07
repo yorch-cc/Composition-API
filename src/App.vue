@@ -1,6 +1,7 @@
 <script setup>
-import BlogPost from './BlogPost.vue';
 import{ref} from 'vue';
+import BlogPost from './BlogPost.vue';
+import PaginatePost from './components/PaginatePost.vue';
 
 const posts = ref([]);
 
@@ -22,6 +23,9 @@ fetch('https://jsonplaceholder.typicode.com/posts')
   <h1>Yorch</h1>
   <h2>Mi Post Fav: {{ fav }}</h2>
 
+  <PaginatePost class="mb-2"/>
+
+
 
 <BlogPost 
 v-for="post in posts"
@@ -30,6 +34,7 @@ v-for="post in posts"
     :id="post.id"
      :body="post.body" 
      @cambiarFavNombre ="cambiarFav"
+     class="mb-2"
 />
 
 </div>  
