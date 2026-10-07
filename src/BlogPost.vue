@@ -10,8 +10,9 @@
     }
  })
 
-
-</script>
+ const emit = defineEmits(['cambiarFavNombre'])
+ 
+ </script>
 
 
 
@@ -20,7 +21,11 @@
         <div class="card-body">
             <h5 class="card-title"
             >{{id}}-{{ title }}</h5>
-            <p>body</p>
+            <p>{{ body }}</p>
+            <button @click="emit('cambiarFavNombre', title)" 
+            class="btn btn-outline-primary ">
+            Fav
+         </button>
          </div>
     </div>
 </template>
