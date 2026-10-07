@@ -33,8 +33,10 @@ const prev = () =>{
 fetch('https://jsonplaceholder.typicode.com/posts')
 .then((res) => res.json())
 .then((data) => {
-  posts.value = data
-loading.value = false})
+  posts.value = data;
+})
+.catch((e) => console.log(e))
+.finally(() => (loading.value = false))
 
 </script>
 
