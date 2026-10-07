@@ -2,6 +2,7 @@
 import{ref} from 'vue';
 import BlogPost from './BlogPost.vue';
 import PaginatePost from './components/PaginatePost.vue';
+import LoadingSpinner from './components/LoadingSpinner.vue';
 
 const posts = ref([]);
 
@@ -12,6 +13,8 @@ const postXPage = 10
 const inicio = ref(0)
 
 const fin = ref(postXPage)
+
+const loading = ref(true)
 
 const cambiarFav = (post) => {
   fav.value = post
@@ -30,12 +33,15 @@ const prev = () =>{
 fetch('https://jsonplaceholder.typicode.com/posts')
 .then((res) => res.json())
 .then((data) => {
-  posts.value = data})
+  posts.value = data
+loading.value = false})
 
 </script>
 
 <template>
-  <div class="container">
+  <LoadingSpinner v-if="loading"/>
+
+  <div class="container" >
   <h1>Yorch</h1>
   <h2>Mi Post Fav: {{ fav }}</h2>
 
