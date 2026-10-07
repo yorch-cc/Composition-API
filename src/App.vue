@@ -1,5 +1,5 @@
 <script setup>
-import{ref} from 'vue';
+import{ref, onMounted} from 'vue';
 import BlogPost from './BlogPost.vue';
 import PaginatePost from './components/PaginatePost.vue';
 import LoadingSpinner from './components/LoadingSpinner.vue';
@@ -30,20 +30,50 @@ const prev = () =>{
   fin.value = fin.value - postXPage
  }
 
-fetch('https://jsonplaceholder.typicode.com/posts')
+/*fetch('https://jsonplaceholder.typicode.com/posts')
 .then((res) => res.json())
 .then((data) => {
   posts.value = data;
 })
 .catch((e) => console.log(e))
-.finally(() => (loading.value = false))
+.finally(() => (loading.value = false)) */
 
+/*onMounted(async() => {
+    //loading.value = true;
+    try{
+      const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+      posts.value = await res.json()
+    } catch(error){
+      console.log(error) 
+    } finally{
+      setTimeout(() => {
+         loading.value = false;
+      }, 2000);
+     
+    }
+}) */
+
+const fetchData = async() => {
+  
+    try{
+      const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+      posts.value = await res.json()
+    } catch(error){
+      console.log(error) 
+    } finally{
+      setTimeout(() => {
+         loading.value = false;
+      }, 2000);
+     
+    }
+}
+fetchData()
 </script>
 
 <template>
   <LoadingSpinner v-if="loading"/>
 
-  <div class="container" >
+  <div class="container" v-else>
   <h1>Yorch</h1>
   <h2>Mi Post Fav: {{ fav }}</h2>
 
